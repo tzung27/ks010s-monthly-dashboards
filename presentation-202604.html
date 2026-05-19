@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KS010S 2026年4月 營運績效與量能分析</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#F0F4F8;
+  --white:#FFFFFF;
+  --navy:#1E3A5F;
+  --blue:#2563EB;
+  --blue-light:#DBEAFE;
+  --teal:#0D9488;
+  --teal-light:#CCFBF1;
+  --amber:#D97706;
+  --amber-light:#FEF3C7;
+  --slate:#64748B;
+  --slate-light:#F1F5F9;
+  --text:#0F172A;
+  --text-muted:#64748B;
+  --border:#E2E8F0;
+  --shadow:0 4px 24px rgba(30,58,95,0.10);
+  --shadow-lg:0 12px 40px rgba(30,58,95,0.16);
+  --radius:16px;
+}
+html,body{width:100%;height:100%;background:#1E3A5F;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans TC',sans-serif;overflow:hidden}
+.deck{width:1280px;height:720px;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);transform-origin:center center}
+.slide{position:absolute;inset:0;display:none;background:var(--bg);border-radius:20px;overflow:hidden}
+.slide.active{display:flex}
+/* Navigation */
+.nav{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:100}
+.nav-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.35);cursor:pointer;transition:.3s}
+.nav-dot.active{background:#fff;transform:scale(1.3)}
+.nav-arrow{position:fixed;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.12);border:none;color:#fff;width:44px;height:44px;border-radius:50%;font-size:20px;cursor:pointer;z-index:100;transition:.2s;backdrop-filter:blur(6px)}
+.nav-arrow:hover{background:rgba(255,255,255,0.25)}
+#prev{left:12px}#next{right:12px}
+.slide-num{position:absolute;bottom:20px;right:24px;font-size:11px;color:var(--text-muted);letter-spacing:.05em;z-index:10}
+
+/* ─── SLIDE 1: TITLE ─── */
+#s1{flex-direction:column;justify-content:center;align-items:center;background:linear-gradient(145deg,#0F2547 0%,#1E3A5F 55%,#0D4A7A 100%);position:relative;overflow:hidden}
+#s1::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat}
+#s1 .glow{position:absolute;border-radius:50%;filter:blur(80px);opacity:.18}
+#s1 .g1{width:480px;height:480px;background:#2563EB;top:-120px;right:-100px}
+#s1 .g2{width:360px;height:360px;background:#0D9488;bottom:-100px;left:-80px}
+#s1 .content{position:relative;z-index:2;text-align:center;padding:40px}
+#s1 .badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:6px 16px;color:rgba(255,255,255,.85);font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:24px}
+#s1 .dept{font-size:15px;color:#93C5FD;letter-spacing:.2em;text-transform:uppercase;margin-bottom:12px;font-weight:500}
+#s1 h1{font-size:52px;font-weight:800;color:#fff;line-height:1.15;margin-bottom:8px;letter-spacing:-.01em}
+#s1 h1 span{color:#34D399}
+#s1 .period{font-size:22px;color:rgba(255,255,255,.6);font-weight:300;margin-bottom:36px}
+#s1 .slogan{font-size:19px;color:#FCD34D;font-weight:600;letter-spacing:.1em;margin-bottom:12px}
+#s1 .sub{font-size:14px;color:rgba(255,255,255,.5);letter-spacing:.05em}
+#s1 .chips{display:flex;gap:12px;justify-content:center;margin-top:32px}
+#s1 .chip{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:8px 16px;color:rgba(255,255,255,.8);font-size:13px;font-weight:500}
+#s1 .ai-tag{position:absolute;top:32px;right:36px;display:flex;align-items:center;gap:6px;background:linear-gradient(135deg,#7C3AED,#DB2777);border-radius:999px;padding:6px 14px;color:#fff;font-size:11px;font-weight:700;letter-spacing:.08em}
+
+/* ─── SLIDE 2: KEY METRICS ─── */
+#s2{flex-direction:column;padding:48px 56px}
+.slide-header{margin-bottom:32px}
+.slide-tag{display:inline-block;background:var(--blue-light);color:var(--blue);font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:4px 12px;border-radius:999px;margin-bottom:10px}
+.slide-title{font-size:32px;font-weight:800;color:var(--navy);letter-spacing:-.02em}
+.slide-title span{color:var(--blue)}
+.slide-sub{font-size:14px;color:var(--text-muted);margin-top:4px}
+
+.metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:28px}
+.metric-card{background:var(--white);border-radius:var(--radius);padding:24px 20px;box-shadow:var(--shadow);border:1px solid var(--border);position:relative;overflow:hidden}
+.metric-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;border-radius:0 0 var(--radius) var(--radius)}
+.mc-blue::after{background:linear-gradient(90deg,#2563EB,#60A5FA)}
+.mc-teal::after{background:linear-gradient(90deg,#0D9488,#34D399)}
+.mc-amber::after{background:linear-gradient(90deg,#D97706,#FCD34D)}
+.mc-violet::after{background:linear-gradient(90deg,#7C3AED,#A78BFA)}
+.metric-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:12px}
+.ic-blue{background:var(--blue-light)}
+.ic-teal{background:var(--teal-light)}
+.ic-amber{background:var(--amber-light)}
+.ic-violet{background:#EDE9FE}
+.metric-val{font-size:34px;font-weight:800;color:var(--navy);letter-spacing:-.02em;line-height:1}
+.metric-unit{font-size:13px;color:var(--text-muted);margin-top:2px}
+.metric-label{font-size:13px;color:var(--text-muted);margin-top:8px;font-weight:500}
+.metric-badge{display:inline-block;background:#DCFCE7;color:#16A34A;font-size:10px;font-weight:700;padding:2px 8px;border-radius:999px;margin-top:6px}
+
+.insights-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.insight-box{background:var(--white);border-radius:12px;padding:16px 20px;box-shadow:var(--shadow);border-left:4px solid}
+.ib-blue{border-color:var(--blue)}
+.ib-teal{border-color:var(--teal)}
+.ib-amber{border-color:var(--amber)}
+.insight-box h4{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px}
+.insight-box p{font-size:14px;color:var(--navy);font-weight:600;line-height:1.5}
+
+/* ─── SLIDE 3: TEAM MAP ─── */
+#s3{flex-direction:column;padding:48px 56px}
+.team-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;flex:1}
+.member-card{background:var(--white);border-radius:var(--radius);padding:24px 16px;box-shadow:var(--shadow);border:1px solid var(--border);display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;overflow:hidden;transition:.2s}
+.member-card::before{content:'';position:absolute;top:0;left:0;right:0;height:5px}
+.mc-aaron::before{background:linear-gradient(90deg,#2563EB,#60A5FA)}
+.mc-denny::before{background:linear-gradient(90deg,#16A34A,#4ADE80)}
+.mc-william::before{background:linear-gradient(90deg,#7C3AED,#C084FC)}
+.mc-lucas::before{background:linear-gradient(90deg,#D97706,#FCD34D)}
+.mc-jimmy::before{background:linear-gradient(90deg,#DC2626,#FB7185)}
+.member-avatar{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:12px;font-weight:800;color:#fff}
+.av-aaron{background:linear-gradient(135deg,#2563EB,#60A5FA)}
+.av-denny{background:linear-gradient(135deg,#16A34A,#4ADE80)}
+.av-william{background:linear-gradient(135deg,#7C3AED,#C084FC)}
+.av-lucas{background:linear-gradient(135deg,#D97706,#FCD34D)}
+.av-jimmy{background:linear-gradient(135deg,#DC2626,#FB7185)}
+.member-name{font-size:16px;font-weight:800;color:var(--navy);margin-bottom:2px}
+.member-role{font-size:10px;color:var(--text-muted);line-height:1.4;margin-bottom:14px;min-height:28px}
+.stat-row{width:100%;display:flex;flex-direction:column;gap:6px}
+.stat-item{display:flex;justify-content:space-between;align-items:center;padding:5px 10px;background:var(--slate-light);border-radius:6px}
+.stat-item .skey{font-size:10px;color:var(--text-muted);font-weight:600}
+.stat-item .sval{font-size:12px;font-weight:800;color:var(--navy)}
+.case-bar{width:100%;height:6px;background:var(--border);border-radius:3px;margin-top:10px;overflow:hidden}
+.case-bar-fill{height:100%;border-radius:3px;transition:.8s}
+.cf-aaron{background:linear-gradient(90deg,#2563EB,#60A5FA)}
+.cf-denny{background:linear-gradient(90deg,#16A34A,#4ADE80)}
+.cf-william{background:linear-gradient(90deg,#7C3AED,#C084FC)}
+.cf-lucas{background:linear-gradient(90deg,#D97706,#FCD34D)}
+.cf-jimmy{background:linear-gradient(90deg,#DC2626,#FB7185)}
+
+/* ─── SLIDE 4: HIGHLIGHTS ─── */
+#s4{flex-direction:column;padding:48px 56px}
+.hl-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:18px;flex:1}
+.hl-card{background:var(--white);border-radius:var(--radius);padding:22px 24px;box-shadow:var(--shadow);display:flex;gap:18px;align-items:flex-start;border:1px solid var(--border);position:relative;overflow:hidden}
+.hl-num{font-size:64px;font-weight:900;line-height:.9;opacity:.06;position:absolute;right:16px;top:8px;color:var(--navy)}
+.hl-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
+.hi-green{background:#DCFCE7}
+.hi-purple{background:#EDE9FE}
+.hi-blue{background:var(--blue-light)}
+.hi-red{background:#FEE2E2}
+.hl-body h3{font-size:16px;font-weight:800;color:var(--navy);margin-bottom:4px}
+.hl-body .hl-person{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+.hl-body p{font-size:13px;color:var(--text-muted);line-height:1.6}
+.hl-tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:999px;margin-right:4px;margin-top:4px}
+.ht-green{background:#DCFCE7;color:#16A34A}
+.ht-purple{background:#EDE9FE;color:#7C3AED}
+.ht-blue{background:var(--blue-light);color:var(--blue)}
+.ht-amber{background:var(--amber-light);color:var(--amber)}
+.ht-red{background:#FEE2E2;color:#DC2626}
+
+/* ─── SLIDE 5: DENNY ─── */
+#s5{flex-direction:row;padding:0}
+.member-left{width:340px;background:linear-gradient(160deg,#064E3B,#065F46);display:flex;flex-direction:column;padding:48px 36px;color:#fff;flex-shrink:0}
+.ml-avatar{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#4ADE80,#16A34A);display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:800;color:#fff;margin-bottom:16px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.ml-name{font-size:28px;font-weight:800;line-height:1.1;margin-bottom:4px}
+.ml-role{font-size:12px;color:rgba(255,255,255,.65);font-weight:500;margin-bottom:28px;line-height:1.5}
+.ml-stats{display:flex;flex-direction:column;gap:12px;margin-bottom:28px}
+.ml-stat{background:rgba(255,255,255,.1);border-radius:10px;padding:12px 16px}
+.ml-stat .msv{font-size:26px;font-weight:800;color:#4ADE80}
+.ml-stat .msl{font-size:11px;color:rgba(255,255,255,.6);margin-top:2px}
+.ml-quote{font-size:13px;color:rgba(255,255,255,.7);line-height:1.7;font-style:italic;border-left:3px solid rgba(255,255,255,.3);padding-left:12px;margin-top:auto}
+.member-right{flex:1;padding:48px 44px;overflow:auto;display:flex;flex-direction:column}
+.case-section{margin-bottom:24px}
+.cs-label{font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.cs-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.case-list{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.case-item{background:var(--white);border-radius:10px;padding:12px 14px;border:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.ci-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.ci-client{font-size:12px;font-weight:700;color:var(--navy)}
+.ci-count{font-size:11px;font-weight:800;color:var(--teal)}
+.ci-service{font-size:11px;color:var(--text-muted)}
+.highlight-list{display:flex;flex-wrap:wrap;gap:8px}
+.hl-pill{background:var(--slate-light);border:1px solid var(--border);border-radius:999px;padding:6px 14px;font-size:12px;color:var(--navy);font-weight:500}
+
+/* ─── SLIDE 6: WILLIAM ─── */
+#s6{flex-direction:row;padding:0}
+.wl-left{width:340px;background:linear-gradient(160deg,#3B0764,#4C1D95);display:flex;flex-direction:column;padding:48px 36px;color:#fff;flex-shrink:0}
+.wl-badge{background:linear-gradient(135deg,#F59E0B,#FCD34D);color:#1C1917;font-size:11px;font-weight:800;padding:4px 12px;border-radius:999px;display:inline-block;margin-bottom:16px;letter-spacing:.05em}
+
+/* ─── SLIDE 7: AARON ─── */
+#s7{flex-direction:row;padding:0}
+.al-left{width:340px;background:linear-gradient(160deg,#1E3A8A,#1D4ED8);display:flex;flex-direction:column;padding:48px 36px;color:#fff;flex-shrink:0}
+
+/* ─── SLIDE 8: LUCAS ─── */
+#s8{flex-direction:row;padding:0}
+.ll-left{width:340px;background:linear-gradient(160deg,#78350F,#B45309);display:flex;flex-direction:column;padding:48px 36px;color:#fff;flex-shrink:0}
+
+/* ─── SLIDE 9: JIMMY ─── */
+#s9{flex-direction:row;padding:0}
+.jl-left{width:340px;background:linear-gradient(160deg,#7F1D1D,#B91C1C);display:flex;flex-direction:column;padding:48px 36px;color:#fff;flex-shrink:0}
+
+/* ─── SLIDE 10: AI WORKFLOW ─── */
+#s10{flex-direction:column;background:linear-gradient(145deg,#0A0F1E 0%,#0D1B3E 50%,#0A1628 100%);justify-content:center;align-items:center;position:relative;overflow:hidden}
+#s10::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 30%,rgba(37,99,235,.18),transparent),radial-gradient(ellipse 50% 50% at 80% 80%,rgba(13,148,136,.12),transparent)}
+.ai-content{position:relative;z-index:2;width:100%;padding:40px 60px}
+.ai-title{text-align:center;margin-bottom:36px}
+.ai-badge{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,rgba(124,58,237,.4),rgba(219,39,119,.4));border:1px solid rgba(167,139,250,.4);border-radius:999px;padding:6px 16px;color:#C4B5FD;font-size:11px;font-weight:700;letter-spacing:.12em;margin-bottom:12px}
+.ai-title h2{font-size:36px;font-weight:900;color:#fff;letter-spacing:-.02em;margin-bottom:8px}
+.ai-title h2 em{font-style:normal;background:linear-gradient(90deg,#60A5FA,#34D399);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.ai-title p{font-size:15px;color:rgba(255,255,255,.55);font-weight:400}
+.ai-flow{display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:stretch;max-width:960px;margin:0 auto}
+.flow-col{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:24px}
+.flow-col h3{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:16px}
+.flow-col.fc-report h3{color:#60A5FA}
+.flow-col.fc-pres h3{color:#34D399}
+.flow-arrow{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 20px;font-size:28px;color:rgba(255,255,255,.2)}
+.flow-step{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px}
+.flow-step:last-child{margin-bottom:0}
+.fs-num{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;flex-shrink:0;margin-top:1px}
+.fsn-blue{background:rgba(96,165,250,.2);color:#60A5FA;border:1px solid rgba(96,165,250,.3)}
+.fsn-green{background:rgba(52,211,153,.2);color:#34D399;border:1px solid rgba(52,211,153,.3)}
+.fs-body strong{font-size:13px;color:#fff;font-weight:700;display:block;margin-bottom:2px}
+.fs-body span{font-size:11px;color:rgba(255,255,255,.5);line-height:1.5}
+.ai-result{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:960px;margin:20px auto 0}
+.air-item{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:16px;text-align:center}
+.air-icon{font-size:28px;margin-bottom:8px}
+.air-val{font-size:22px;font-weight:800;color:#fff;margin-bottom:4px}
+.air-label{font-size:11px;color:rgba(255,255,255,.5)}
+
+/* ─── SLIDE 11: NEXT MONTH ─── */
+#s11{flex-direction:column;padding:48px 56px}
+.next-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;flex:1}
+.next-card{background:var(--white);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);border:1px solid var(--border);display:flex;flex-direction:column}
+.nc-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.nc-avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;flex-shrink:0}
+.nc-name{font-size:14px;font-weight:800;color:var(--navy)}
+.nc-role{font-size:10px;color:var(--text-muted)}
+.nc-list{list-style:none;display:flex;flex-direction:column;gap:7px;flex:1}
+.nc-list li{font-size:11.5px;color:var(--text-muted);padding-left:12px;position:relative;line-height:1.5}
+.nc-list li::before{content:'›';position:absolute;left:0;color:var(--blue);font-weight:800}
+
+/* ─── SLIDE 12: CLOSING ─── */
+#s12{flex-direction:column;justify-content:center;align-items:center;background:linear-gradient(145deg,#0F2547,#1E3A5F,#0D4A7A);position:relative;overflow:hidden}
+#s12::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(37,99,235,.15),transparent)}
+.closing-content{position:relative;z-index:2;text-align:center;padding:40px}
+.closing-content .crown{font-size:48px;margin-bottom:16px}
+.closing-quote{font-size:28px;font-weight:800;color:#fff;line-height:1.5;margin-bottom:8px;letter-spacing:-.01em}
+.closing-quote em{font-style:normal;color:#FCD34D}
+.closing-author{font-size:14px;color:rgba(255,255,255,.5);margin-bottom:36px}
+.closing-stats{display:flex;gap:32px;justify-content:center;margin-bottom:32px}
+.cs-item{text-align:center}
+.cs-item .cv{font-size:32px;font-weight:900;color:#60A5FA}
+.cs-item .cl{font-size:12px;color:rgba(255,255,255,.5);margin-top:2px}
+.closing-footer{font-size:13px;color:rgba(255,255,255,.4);letter-spacing:.08em}
+.ai-powered-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,rgba(124,58,237,.35),rgba(219,39,119,.35));border:1px solid rgba(167,139,250,.4);border-radius:999px;padding:8px 20px;color:#C4B5FD;font-size:12px;font-weight:700;letter-spacing:.08em;margin-top:16px}
+
+/* ─── SHARED MEMBER SLIDE COMPONENTS ─── */
+.ml-avatar-w{background:linear-gradient(135deg,#A78BFA,#7C3AED)}
+.ml-avatar-l{background:linear-gradient(135deg,#FCD34D,#D97706)}
+.ml-avatar-j{background:linear-gradient(135deg,#FB7185,#DC2626)}
+.ml-stat .msv.green{color:#4ADE80}
+.ml-stat .msv.purple{color:#C084FC}
+.ml-stat .msv.amber{color:#FCD34D}
+.ml-stat .msv.blue{color:#93C5FD}
+.ml-stat .msv.red{color:#FCA5A5}
+
+.right-content{flex:1;padding:44px;display:flex;flex-direction:column;gap:20px}
+.rc-section{background:var(--white);border-radius:12px;padding:18px 20px;box-shadow:var(--shadow);border:1px solid var(--border)}
+.rc-section h4{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.rc-section h4::after{content:'';flex:1;height:1px;background:var(--border)}
+.tag-cloud{display:flex;flex-wrap:wrap;gap:8px}
+.tag{padding:5px 12px;border-radius:999px;font-size:12px;font-weight:600;border:1px solid}
+.t-blue{background:var(--blue-light);color:var(--blue);border-color:#BFDBFE}
+.t-green{background:#DCFCE7;color:#16A34A;border-color:#BBF7D0}
+.t-purple{background:#EDE9FE;color:#7C3AED;border-color:#DDD6FE}
+.t-amber{background:var(--amber-light);color:var(--amber);border-color:#FDE68A}
+.t-red{background:#FEE2E2;color:#DC2626;border-color:#FECACA}
+.t-teal{background:var(--teal-light);color:var(--teal);border-color:#99F6E4}
+.revenue-highlight{background:linear-gradient(135deg,#FFFBEB,#FEF3C7);border:2px solid #FDE68A;border-radius:12px;padding:16px 20px;display:flex;align-items:center;gap:16px}
+.rh-icon{font-size:32px}
+.rh-val{font-size:28px;font-weight:900;color:#92400E}
+.rh-label{font-size:12px;color:#A16207}
+.collab-section{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.collab-item{background:var(--slate-light);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--navy);font-weight:500}
+.collab-item strong{display:block;font-size:10px;color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px}
+</style>
+</head>
+<body>
+
+<button class="nav-arrow" id="prev" onclick="go(-1)">‹</button>
+<button class="nav-arrow" id="next" onclick="go(1)">›</button>
+
+<div class="deck" id="deck">
+
+<!-- ══════════════════════════════════════
+     SLIDE 1 — TITLE
+══════════════════════════════════════ -->
+<div class="slide active" id="s1">
+  <div class="glow g1"></div>
+  <div class="glow g2"></div>
+  <div class="ai-tag">✦ AI Powered 全程一條龍</div>
+  <div class="content">
+    <div class="badge">🏢 KS010S &nbsp;·&nbsp; 部門月報</div>
+    <div class="dept">樂 Team Performance Review</div>
+    <h1>2026年<span>4月</span></h1>
+    <div class="period">團隊營運績效與量能分析</div>
+    <div class="slogan">「 智能驅動 · 量能全開 · 價值倍增 」</div>
+    <div class="sub">OPERATIONAL PERFORMANCE &amp; CAPACITY ANALYSIS</div>
+    <div class="chips">
+      <div class="chip">📊 379 件服務</div>
+      <div class="chip">💰 NT$216,500 虛擬費用</div>
+      <div class="chip">🏆 NT$75,000 實收營收</div>
+      <div class="chip">👥 5 位活躍成員</div>
+    </div>
+  </div>
+  <div class="slide-num">1 / 12</div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SLIDE 2 — KEY METRICS
+══════════════════════════════════════ -->
+<div class="slide" id="s2">
+  <div class="slide-header">
+    <div class="slide-tag">Executive Summary</div>
+    <div class="slide-title">本月 <span>關鍵數據</span> 一覽</div>
+    <div class="slide-sub">2026年4月 · KS010S 樂團隊 · 綜合績效摘要</div>
+  </div>
+  <div class="metrics-grid">
+    <div class="metric-card mc-blue">
+      <div class="metric-icon ic-blue">📋</div>
+      <div class="metric-val">379</div>
+      <div class="metric-unit">件</div>
+      <div class="metric-label">本月服務總案件數</div>
+      <div class="metric-badge">↑ 5人滿載出動</div>
+    </div>
+    <div class="metric-card mc-teal">
+      <div class="metric-icon ic-teal">💼</div>
+      <div class="metric-val">216,500</div>
+      <div class="metric-unit">NT$</div>
+      <div class="metric-label">虛擬費用（服務價值）</div>
+      <div class="metric-badge">跨 5 大技術領域</div>
+    </div>
+    <div class="metric-card mc-amber">
+      <div class="metric-icon ic-amber">🏆</div>
+      <div class="metric-val">75,000</div>
+      <div class="metric-unit">NT$</div>
+      <div class="metric-label">實際確認收費</div>
+      <div class="metric-badge">華航年度專案</div>
+    </div>
+    <div class="metric-card mc-violet">
+      <div class="metric-icon ic-violet">🤝</div>
+      <div class="metric-val">12+</div>
+      <div class="metric-unit">件</div>
+      <div class="metric-label">跨成員協作案件</div>
+      <div class="metric-badge">William × Denny 主力</div>
+    </div>
+  </div>
+  <div class="insights-row">
+    <div class="insight-box ib-blue">
+      <h4>🍎 端點管理主力</h4>
+      <p>Denny 本月處理 <strong>101 件</strong> Apple/Jamf 含彰銀多分行 iPad 大量 DFU 操作，單人創造 NT$83,200 服務價值</p>
+    </div>
+    <div class="insight-box ib-teal">
+      <h4>⭐ 高價值服務突破</h4>
+      <p>奇美醫院 Jamf Pro iOS Training、Zeabur AI 解決方案 MDM 整合，技術廣度持續向高附加值延伸</p>
+    </div>
+    <div class="insight-box ib-amber">
+      <h4>🎓 AI 培訓 &amp; 內容輸出</h4>
+      <p>Jimmy 完成雲科大 Firefly AI 講座 + 技術專欄 68 篇產出，AI 推廣量能超預期交付</p>
+    </div>
+  </div>
+  <div class="slide-num">2 / 12</div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SLIDE 3 — TEAM CAPACITY MAP
+══════════════════════════════════════ -->
+<div class="slide" id="s3">
+  <div style="padding:48px 56px;display:flex;flex-direction:column;height:100%">
+    <div class="slide-header">
+      <div class="slide-tag">Team Capacity</div>
+      <div class="slide-title">成員 <span>量能地圖</span></div>
+      <div class="slide-sub">各成員本月服務件數、虛擬費用與技術領域分佈</div>
+    </div>
+    <div class="team-grid">
+      <div class="member-card">
+        <div class="member-card::before mc-aaron"></div>
+        <div class="member-avatar av-aaron">A</div>
+        <div class="member-name">Aaron</div>
+        <div class="member-role">全能型雲端支援專家</div>
+        <div class="stat-row">
+          <div class="stat-item"><span class="skey">案件數</span><span class="sval" style="color:#2563EB">96</span></div>
+          <div class="stat-item"><span class="skey">虛擬費用</span><span class="sval">$51,100</span></div>
+          <div class="stat-item"><span class="skey">主要領域</span><span class="sval" style="font-size:10px">M365 / Cloudiway</span></div>
+        </div>
+        <div class="case-bar"><div class="case-bar-fill cf-aaron" style="width:82%"></div></div>
+      </div>
+      <div class="member-card">
+        <div class="member-avatar av-denny">D</div>
+        <div class="member-name">Denny</div>
+        <div class="member-role">端點管理與資安主力</div>
+        <div class="stat-row">
+          <div class="stat-item"><span class="skey">案件數</span><span class="sval" style="color:#16A34A">117</span></div>
+          <div class="stat-item"><span class="skey">虛擬費用</span><span class="sval">$83,200</span></div>
+          <div class="stat-item"><span class="skey">主要領域</span><span class="sval" style="font-size:10px">Apple / Jamf / TM</span></div>
+        </div>
+        <div class="case-bar"><div class="case-bar-fill cf-denny" style="width:100%"></div></div>
+      </div>
+      <div class="member-card">
+        <div class="member-avatar av-william">W</div>
+        <div class="member-name">William</div>
+        <div class="member-role">高價值服務與營收貢獻者</div>
+        <div class="stat-row">
+          <div class="stat-item"><span class="skey">案件數</span><span class="sval" style="color:#7C3AED">43</span></div>
+          <div class="stat-item"><span class="skey">實收</span><span class="sval" style="color:#D97706">$75,000</span></div>
+          <div class="stat-item"><span class="skey">主要領域</span><span class="sval" style="font-size:10px">Jamf 培訓 / 卡巴</span></div>
+        </div>
+        <div class="case-bar"><div class="case-bar-fill cf-william" style="width:37%"></div></div>
+      </div>
+      <div class="member-card">
+        <div class="member-avatar av-lucas">L</div>
+        <div class="member-name">Lucas</div>
+        <div class="member-role">Azure 雲端基礎架構手</div>
+        <div class="stat-row">
+          <div class="stat-item"><span class="skey">案件數</span><span class="sval" style="color:#D97706">51</span></div>
+          <div class="stat-item"><span class="skey">虛擬費用</span><span class="sval">$29,400</span></div>
+          <div class="stat-item"><span class="skey">主要領域</span><span class="sval" style="font-size:10px">Azure / 資安</span></div>
+        </div>
+        <div class="case-bar"><div class="case-bar-fill cf-lucas" style="width:44%"></div></div>
+      </div>
+      <div class="member-card">
+        <div class="member-avatar av-jimmy">J</div>
+        <div class="member-name">Jimmy</div>
+        <div class="member-role">培訓與內容產出導師</div>
+        <div class="stat-row">
+          <div class="stat-item"><span class="skey">交付項</span><span class="sval" style="color:#DC2626">72</span></div>
+          <div class="stat-item"><span class="skey">技術文章</span><span class="sval">68 篇</span></div>
+          <div class="stat-item"><span class="skey">主要領域</span><span class="sval" style="font-size:10px">Adobe / AI 培訓</span></div>
+        </div>
+        <div class="case-bar"><div class="case-bar-fill cf-jimmy" style="width:62%"></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">3 / 12</div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SLIDE 4 — HIGHLIGHTS
+══════════════════════════════════════ -->
+<div class="slide" id="s4">
+  <div class="slide-header" style="padding:48px 56px 24px">
+    <div class="slide-tag">Monthly Highlights</div>
+    <div class="slide-title">本月 <span>四大亮點</span></div>
+    <div class="slide-sub">技術突破 × 客戶深化 × 量能擴展 × AI 創新</div>
+  </div>
+  <div class="hl-grid" style="padding:0 56px 40px;flex:1">
+    <div class="hl-card">
+      <div class="hl-num">01</div>
+      <div class="hl-icon hi-green">🍎</div>
+      <div class="hl-body">
+        <div class="hl-person" style="color:#16A34A">Denny — 端點管理主力</div>
+        <h3>彰銀 × 華航 大規模 iPad 管理</h3>
+        <p>跨 30+ 彰銀分行執行 iPad DFU/ADE 重建，華航多組 Jamf Trust Wi-Fi 問題緊急排除，單月 101 件 Apple/Jamf 服務創新高</p>
+        <div><span class="hl-tag ht-green">彰化銀行</span><span class="hl-tag ht-green">中華航空</span><span class="hl-tag ht-amber">101 件</span></div>
+      </div>
+    </div>
+    <div class="hl-card">
+      <div class="hl-num">02</div>
+      <div class="hl-icon hi-purple">🏆</div>
+      <div class="hl-body">
+        <div class="hl-person" style="color:#7C3AED">William — 高價值服務</div>
+        <h3>奇美醫院 Jamf 培訓 + 華航實收突破</h3>
+        <p>完成奇美醫院 Jamf Pro iOS 專業培訓，Zeabur AI 解決方案 ABM/MDM 整合，確認 NT$75,000 實收（華航年度合約 NT$300,000/年）</p>
+        <div><span class="hl-tag ht-purple">奇美醫院</span><span class="hl-tag ht-amber">NT$75,000 實收</span><span class="hl-tag ht-blue">AI 整合</span></div>
+      </div>
+    </div>
+    <div class="hl-card">
+      <div class="hl-num">03</div>
+      <div class="hl-icon hi-blue">☁️</div>
+      <div class="hl-body">
+        <div class="hl-person" style="color:#2563EB">Lucas — Azure 雲端</div>
+        <h3>SC-200 認證達成 + Sentinel POC 開通</h3>
+        <p>Lucas 通過 Microsoft SC-200 資安認證，同步協助中華資安國際開通 Azure Sentinel POC 安全監控，持續拓展雲端資安量能</p>
+        <div><span class="hl-tag ht-blue">SC-200 認證</span><span class="hl-tag ht-blue">Sentinel POC</span><span class="hl-tag ht-teal">AWS→Azure</span></div>
+      </div>
+    </div>
+    <div class="hl-card">
+      <div class="hl-num">04</div>
+      <div class="hl-icon hi-red">🤖</div>
+      <div class="hl-body">
+        <div class="hl-person" style="color:#DC2626">Jimmy — AI 培訓先鋒</div>
+        <h3>雲科大 Firefly AI 講座 + 68 篇技術產出</h3>
+        <p>完成國立雲林科技大學 Adobe Firefly AI 應用講座，同步產出 59 篇技術文章＋9 篇內容文章，AI 工具教育推廣成效卓著</p>
+        <div><span class="hl-tag ht-red">雲林科大</span><span class="hl-tag ht-red">68 篇產出</span><span class="hl-tag ht-amber">Firefly AI</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">4 / 12</div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SLIDE 5 — DENNY
+══════════════════════════════════════ -->
+<div class="slide" id="s5">
+  <div class="member-left">
+    <div class="ml-avatar" style="background:linear-gradient(135deg,#4ADE80,#16A34A)">D</div>
+    <div class="ml-name">Denny</div>
+    <div class="ml-role">端點管理與資安主力<br>Apple Device Specialist</div>
+    <div class="ml-stats">
+      <div class="ml-stat"><div class="msv green">117</div><div class="msl">本月服務件數</div></div>
+      <div class="ml-stat"><div class="msv green">NT$83,200</div><div class="msl">虛擬費用</div></div>
+      <div class="ml-stat"><div class="msv green">101</div><div class="msl">Apple/Jamf 案件</div></div>
+      <div class="ml-stat"><div class="msv green">16</div><div class="msl">Trend Micro 案件</div></div>
+    </div>
+    <div class="ml-quote">"大量裝置管理、快速應變、端點安全三位一體，彰銀、華航高密度服務創下本月最高案件量"</div>
+  </div>
+  <div class="right-content">
+    <div class="rc-section">
+      <h4>🍎 主要服務亮點</h4>
+      <div class="tag-cloud">
+        <span class="tag t-green">彰銀 30+ 分行 iPad DFU</span>
+        <span class="tag t-green">華航 Jamf Trust Wi-Fi 排除</span>
+        <span class="tag t-green">凱基人壽 macOS MDM 擴展</span>
+        <span class="tag t-blue">Apex One On-Premises 三鶯線</span>
+        <span class="tag t-blue">WFBS 弱點修補</span>
+        <span class="tag t-green">奇美醫院 iOS Training（協作）</span>
+        <span class="tag t-green">Zeabur AI MDM 整合（協作）</span>
+        <span class="tag t-green">強茂 Jamf POC</span>
+      </div>
+    </div>
+    <div class="rc-section">
+      <h4>🤝 重點協作案件</h4>
+      <div class="collab-section">
+        <div class="collab-item"><strong>W × D — 奇美醫院</strong>Jamf Pro iOS Training NT$20,000</div>
+        <div class="collab-item"><strong>W × D — 華航 TPEEMO</strong>ADE×6 + DFU×2 大量處理</div>
+        <div class="collab-item"><strong>W × D — Zeabur</strong>AI 解決方案 ABM/MDM 整合</div>
+        <div class="collab-item"><strong>W × D — 強茂</strong>Jamf for Mobile POC 會議</div>
+      </div>
+    </div>
+    <div class="rc-section">
+      <h4>📅 下月重點計畫</h4>
+      <div class="tag-cloud">
+        <span class="tag t-teal">彰銀 Jamf 憑證更新前置</span>
+        <span class="tag t-teal">凱基人壽 macOS MDM 擴展</span>
+        <span class="tag t-blue">Vision One NAS 防護</span>
+        <span class="tag t-blue">三鶯線 Apex One 驗收</span>
+        <span class="tag t-teal">強茂 Jamf Mobile POC 後續</span>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">5 / 12</div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SLIDE 6 — WILLIAM
+══════════════════════════════════════ -->
+<div class="slide" id="s6">
+  <div class="wl-left member-left">
+    <div class="wl-badge">⭐ 本月最高實收</div>
+    <div class="ml-avatar ml-avatar-w">W</div>
+    <div class="ml-name">William</div>
+    <div class="ml-role">高價值服務與營收貢獻者<br>Jamf Premium Specialist</div>
+    <div class="ml-stats">
+      <div class="ml-stat"><div class="msv purple">43</div><div class="msl">本月服務件數</div></div>
+      <div class="ml-stat"><div class="msv purple">NT$52,800</div><div class="msl">虛擬費用</div></div>
+      <div class="ml-stat"><div class="msv" style="color:#FCD34D">NT$75,000</div><div class="msl">🏆 確認實收</div></div>
+    </div>
+    <div class="ml-quote">"精準聚焦高附加值服務，培訓、AI 整合、年度合約三箭齊發，以質取勝"</div>
+  </div>
+  <div class="right-content">
+    <div class="revenue-highlight">
+      <div class="rh-icon">🏆</div>
+      <div>
+        <div class="rh-val">NT$75,000</div>
+        <div class="rh-label">華航年度服務合約 · 正式確認實收（全年 NT$300,000）</div>
+      </div>
+    </div>
+    <div class="rc-section">
+      <h4>✨ 本月亮點服務</h4>
+      <div class="tag-cloud">
+        <span class="tag t-purple">奇美醫院 Jamf iOS 培訓</span>
+        <span class="tag t-purple">Zeabur AI 解決方案 MDM</span>
+        <span class="tag t-purple">凱基人壽 macOS 擴展</span>
+        <span class="tag t-amber">Kaspersky 管理中心維護 ×17</span>
+        <span class="tag t-amber">KSC MMC / WSUS 故障排除</span>
+        <span class="tag t-blue">華航多組 Jamf Security 問題</span>
+        <span class="tag t-teal">強茂 MDM POC</span>
+      </div>
+    </div>
+    <div class="rc-section">
+      <h4>📅 下月重點展望</h4>
+      <div class="tag-cloud">
+        <span class="tag t-purple">華航 Jamf 年度續約洽談</span>
+        <span class="tag t-purple">奇美醫院進階培訓規劃</span>
+        <span class="tag t-amber">KES 升版服務推廣</span>
+        <span class="tag t-teal">強茂 MDM POC 轉正式合約</span>
+        <span class="tag t-purple">資生堂 Jamf 擴展評估</span>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">6 / 12</div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SLIDE 7 — AARON
+══════════════════════════════════════ -->
+<div class="slide" id="s7">
+  <div class="al-left member-left">
+    <div class="ml-avatar" style="background:linear-gradient(135deg,#60A5FA,#2563EB)">A</div>
+    <div class="ml-name">Aaron</div>
+    <div class="ml-role">全能型雲端支援專家<br>M365 / Cloudiway Specialist</div>
+    <div class="ml-stats">
+      <div class="ml-stat"><div class="msv blue">96</div><div class="msl">本月服務件數</div></div>
+      <div class="ml-stat"><div class="msv blue">NT$51,100</div><div class="msl">虛擬費用</div></div>
+      <div class="ml-stat"><div class="msv blue">8</div><div class="msl">Cloudiway 遷移案</div></div>
+    </div>
+    <div class="ml-quote">"M365 全領域制霸，從 MFA 緊急重設到 Tenant-to-Tenant 遷移規劃，廣度與深度兼具"</div>
+  </div>
+  <div class="right-content">
+    <div class="rc-section">
+      <h4>☁️ 服務分佈</h4>
+      <div class="tag-cloud">
+        <span class="tag t-blue">Exchange Online / Hybrid</span>
+        <span class="tag t-blue">MFA 重設（多件）</span>
+        <span class="tag t-blue">Defender for Business / Endpoint</span>
+        <span class="tag t-blue">SharePoint / OneDrive</span>
+        <span class="tag t-blue">Entra ID / AD 整合</span>
+        <span class="tag t-blue">Power BI / Automate</span>
+        <span class="tag t-blue">Business Central 升版</span>
+        <span class="tag t-teal">Cloudiway T2T 遷移教學</span>
+        <span class="tag t-teal">Gmail → Exchange Online</span>
+        <span class="tag t-teal">GWS → M365 遷移諮詢</span>
+      </div>
+    </div>
+    <div class="rc-section">
+      <h4>🌟 本月重點突破</h4>
+      <div class="collab-section">
+        <div class="collab-item"><strong>添鴻 T2T 遷移</strong>流程教學 + 工具操作 + 文件製作 NT$3,000</div>
+        <div class="collab-item"><strong>國喬石化 Hybrid</strong>Exchange Online + Hibox 混合架構問題</div>
+        <div class="collab-item"><strong>安心食品</strong>Entra ID 取代地端 AD 完整諮詢</div>
+        <div class="collab-item"><strong>美好證券</strong>Intune Windows 裝置更新管理</div>
+      </div>
+    </div>
+    <div class="rc-section">
+      <h4>📅 下月重點</h4>
+      <div class="tag-cloud">
+        <span class="tag t-teal">Cloudiway T2T 遷移實作推進</span>
+        <span class="tag t-blue">Defender for Business 部署跟進</span>
+        <span class="tag t-blue">Entra ID 取代 AD 規劃協助</span>
+        <span class="tag t-blue">BC 升版問題追蹤</span>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">7 / 12</div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SLIDE 8 — LUCAS
+══════════════════════════════════════ -->
+<div class="slide" id="s8">
+  <div class="ll-left member-left">
+    <div class="ml-avatar ml-avatar-l">L</div>
+    <div class="ml-name">Lucas</div>
+    <div class="ml-role">Azure 雲端基礎架構手<br>SC-200 Certified · Cloud Security</div>
+    <div class="ml-stats">
+      <div class="ml-stat"><div class="msv amber">51</div><div class="msl">本月服務件數</div></div>
+      <div class="ml-stat"><div class="msv amber">NT$29,400</div><div class="msl">虛擬費用</div></div>
+      <div class="ml-stat"><div class="msv" style="color:#FCD34D">SC-200</div><div class="msl">🎓 本月認證達成</div></div>
+    </div>
+    <div class="ml-quote">"從配額申請到資安 POC，Azure 全棧能力持續深化，認證加持讓技術說話"</div>
+  </div>
+  <div class="right-content">
+    <div class="rc-section" style="background:linear-gradient(135deg,#FFFBEB,#FEF3C7);border-color:#FDE68A">
+      <h4 style="color:#92400E">🎓 本月特別成就</h4>
+      <div style="display:flex;align-items:center;gap:16px">
+        <div style="font-size:36px">🏅</div>
+        <div>
+          <div style="font-size:18px;font-weight:800;color:#78350F">Microsoft SC-200 資安認證通過</div>
+          <div style="font-size:12px;color:#A16207;margin-top:4px">Security Operations Analyst Associate · 強化團隊資安量能與客戶信任度</div>
+        </div>
+      </div>
+    </div>
+    <div class="rc-section">
+      <h4>☁️ Azure 服務亮點</h4>
+      <div class="tag-cloud">
+        <span class="tag t-amber">Sentinel POC 開通（中華資安）</span>
+        <span class="tag t-amber">AWS → Azure 遷移規劃（坤侑）</span>
+        <span class="tag t-amber">GPU VM 配額申請（多客戶）</span>
+        <span class="tag t-amber">資安攻擊疑慮排查（網際智慧）</span>
+        <span class="tag t-amber">帳號被駭緊急處理（國華牙材）</span>
+        <span class="tag t-blue">展碁 SC-200 線上雲知識課</span>
+        <span class="tag t-teal">Azure Arc / Blob 異常排查</span>
+      </div>
+    </div>
+    <div class="rc-section">
+      <h4>📅 下月重點</h4>
+      <div class="tag-cloud">
+        <span class="tag t-amber">Sentinel POC 驗收報告</span>
+        <span class="tag t-amber">坤侑 AWS→Azure 遷移執行</span>
+        <span class="tag t-teal">嘉龍資訊 VM 升版驗收</span>
+        <span class="tag t-amber">備份機制標準化 SOP</span>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">8 / 12</div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SLIDE 9 — JIMMY
+══════════════════════════════════════ -->
+<div class="slide" id="s9">
+  <div class="jl-left member-left">
+    <div class="ml-avatar ml-avatar-j">J</div>
+    <div class="ml-name">Jimmy</div>
+    <div class="ml-role">培訓與內容產出導師<br>Adobe AI Evangelist</div>
+    <div class="ml-stats">
+      <div class="ml-stat"><div class="msv red">72</div><div class="msl">本月交付項目</div></div>
+      <div class="ml-stat"><div class="msv red">68</div><div class="msl">技術＋內容文章</div></div>
+      <div class="ml-stat"><div class="msv" style="color:#FCA5A5">3+</div><div class="msl">外部演講 / 培訓</div></div>
+    </div>
+    <div class="ml-quote">"AI 工具不是威脅，是加速器 — 用 Adobe Firefly 帶領學員看見設計的未來"</div>
+  </div>
+  <div class="right-content">
+    <div class="rc-section">
+      <h4>🎤 本月重點交付</h4>
+      <div class="collab-section">
+        <div class="collab-item"><strong>🎓 雲林科技大學</strong>Adobe Firefly AI 應用講座（外部演講）</div>
+        <div class="collab-item"><strong>📚 生成式 AI 培訓</strong>AI 工具整合應用課程</div>
+        <div class="collab-item"><strong>✍️ 技術專欄</strong>59 篇技術文 + 9 篇內容文 = 68 篇</div>
+        <div class="collab-item"><strong>🎬 影音教學</strong>AI 向量設計影音教學系列</div>
+        <div class="collab-item"><strong>🏢 Adobe CC 部署</strong>企業版授權管理</div>
+        <div class="collab-item"><strong>✍️ Acrobat Sign</strong>電子簽章導入協助</div>
+      </div>
+    </div>
+    <div class="rc-section">
+      <h4>🤖 AI 工具推廣成果</h4>
+      <div class="tag-cloud">
+        <span class="tag t-red">Adobe Firefly 生成式 AI</span>
+        <span class="tag t-red">AI 向量設計教學</span>
+        <span class="tag t-amber">外部講座知名度建立</span>
+        <span class="tag t-red">Acrobat Sign 數位轉型</span>
+        <span class="tag t-red">技術部落格持續經營</span>
+      </div>
+    </div>
+    <div class="rc-section">
+      <h4>📅 下月計畫</h4>
+      <div class="tag-cloud">
+        <span class="tag t-red">Firefly AI 進階課程規劃</span>
+        <span class="tag t-red">Acrobat Sign 企業推廣</span>
+        <span class="tag t-amber">AI 工具整合培訓材料</span>
+        <span class="tag t-red">月刊 / 部落格持續產出</span>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">9 / 12</div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SLIDE 10 — AI WORKFLOW
+══════════════════════════════════════ -->
+<div class="slide" id="s10">
+  <div class="ai-content">
+    <div class="ai-title">
+      <div class="ai-badge">✦ Innovation Spotlight &nbsp;·&nbsp; 本月特別亮點</div>
+      <h2>AI <em>全程一條龍</em> 工作革命</h2>
+      <p>從資料彙整 → 月報產出 → 簡報製作，全程 AI 賦能，效率與品質同步躍升</p>
+    </div>
+    <div class="ai-flow">
+      <div class="flow-col fc-report">
+        <h3>📊 月報一條龍</h3>
+        <div class="flow-step">
+          <div class="fs-num fsn-blue">1</div>
+          <div class="fs-body"><strong>資料輸入</strong><span>Excel PDF 工作報告 → 結構化 JS 資料</span></div>
+        </div>
+        <div class="flow-step">
+          <div class="fs-num fsn-blue">2</div>
+          <div class="fs-body"><strong>智能分析</strong><span>AI 自動彙整案件、費用、成員績效</span></div>
+        </div>
+        <div class="flow-step">
+          <div class="fs-num fsn-blue">3</div>
+          <div class="fs-body"><strong>儀表板即時呈現</strong><span>互動式圖表、成員比較、趨勢分析</span></div>
+        </div>
+        <div class="flow-step">
+          <div class="fs-num fsn-blue">4</div>
+          <div class="fs-body"><strong>驗證上線</strong><span>AI 自動偵錯 → 確認 → 瀏覽器即可查看</span></div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <span style="color:rgba(255,255,255,.15);font-size:36px">|</span>
+        <span style="color:rgba(255,255,255,.3);margin:8px 0">AI</span>
+        <span style="color:rgba(255,255,255,.15);font-size:36px">|</span>
+      </div>
+      <div class="flow-col fc-pres">
+        <h3>📑 簡報一條龍</h3>
+        <div class="flow-step">
+          <div class="fs-num fsn-green">1</div>
+          <div class="fs-body"><strong>數據萃取</strong><span>AI 讀取儀表板所有數據與亮點</span></div>
+        </div>
+        <div class="flow-step">
+          <div class="fs-num fsn-green">2</div>
+          <div class="fs-body"><strong>故事線設計</strong><span>AI 規劃簡報架構、Slogan、金句</span></div>
+        </div>
+        <div class="flow-step">
+          <div class="fs-num fsn-green">3</div>
+          <div class="fs-body"><strong>設計稿生成</strong><span>AI 產出現代感 HTML 互動簡報</span></div>
+        </div>
+        <div class="flow-step">
+          <div class="fs-num fsn-green">4</div>
+          <div class="fs-body"><strong>即開即用</strong><span>瀏覽器直接播放，鍵盤切換頁面</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="ai-result">
+      <div class="air-item">
+        <div class="air-icon">⚡</div>
+        <div class="air-val">10x</div>
+        <div class="air-label">報告產出效率提升</div>
+      </div>
+      <div class="air-item">
+        <div class="air-icon">🎨</div>
+        <div class="air-val">0</div>
+        <div class="air-label">手工製作設計時間</div>
+      </div>
+      <div class="air-item">
+        <div class="air-icon">🔄</div>
+        <div class="air-val">∞</div>
+        <div class="air-label">可複用 · 每月快速迭代</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num" style="color:rgba(255,255,255,.35)">10 / 12</div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SLIDE 11 — NEXT MONTH
+══════════════════════════════════════ -->
+<div class="slide" id="s11">
+  <div class="slide-header">
+    <div class="slide-tag">Forward Planning</div>
+    <div class="slide-title">下月 <span>重點目標</span></div>
+    <div class="slide-sub">2026年5月 · 各成員優先推進事項</div>
+  </div>
+  <div class="next-grid">
+    <div class="next-card">
+      <div class="nc-header">
+        <div class="nc-avatar" style="background:linear-gradient(135deg,#2563EB,#60A5FA)">A</div>
+        <div><div class="nc-name">Aaron</div><div class="nc-role">M365 / Cloudiway</div></div>
+      </div>
+      <ul class="nc-list">
+        <li>Cloudiway T2T 遷移實作推進</li>
+        <li>Defender for Business 部署案件跟進</li>
+        <li>Entra ID 取代 AD 客戶規劃協助</li>
+        <li>BC 升版問題追蹤與解決</li>
+        <li>Power Automate / SharePoint 整合需求</li>
+      </ul>
+    </div>
+    <div class="next-card">
+      <div class="nc-header">
+        <div class="nc-avatar" style="background:linear-gradient(135deg,#16A34A,#4ADE80)">D</div>
+        <div><div class="nc-name">Denny</div><div class="nc-role">Apple / Jamf / TM</div></div>
+      </div>
+      <ul class="nc-list">
+        <li>彰銀 Jamf 憑證更新前置作業</li>
+        <li>強茂 Jamf for Mobile POC 後續</li>
+        <li>凱基人壽 macOS MDM 擴展</li>
+        <li>Vision One NAS 防護跟進</li>
+        <li>三鶯線 Apex One 建置完成驗收</li>
+      </ul>
+    </div>
+    <div class="next-card">
+      <div class="nc-header">
+        <div class="nc-avatar" style="background:linear-gradient(135deg,#7C3AED,#C084FC)">W</div>
+        <div><div class="nc-name">William</div><div class="nc-role">Jamf / Kaspersky</div></div>
+      </div>
+      <ul class="nc-list">
+        <li>華航 Jamf 年度服務續約洽談</li>
+        <li>奇美醫院 Jamf 進階培訓規劃</li>
+        <li>Kaspersky KES 升版服務推廣</li>
+        <li>強茂 MDM POC 轉正式合約</li>
+        <li>資生堂 Jamf 服務擴展評估</li>
+      </ul>
+    </div>
+    <div class="next-card">
+      <div class="nc-header">
+        <div class="nc-avatar" style="background:linear-gradient(135deg,#D97706,#FCD34D)">L</div>
+        <div><div class="nc-name">Lucas</div><div class="nc-role">Azure / Security</div></div>
+      </div>
+      <ul class="nc-list">
+        <li>Sentinel POC 驗收報告撰寫</li>
+        <li>網際智慧資安強化方案提案</li>
+        <li>嘉龍資訊 VM 升版完成驗收</li>
+        <li>坤侑科技 AWS→Azure 遷移執行</li>
+        <li>Azure 備份機制標準化 SOP</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-num">11 / 12</div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SLIDE 12 — CLOSING
+══════════════════════════════════════ -->
+<div class="slide" id="s12">
+  <div class="closing-content">
+    <div class="crown">🏅</div>
+    <div class="closing-quote">「 每一件服務，都是 <em>信任的積累</em>；<br>每一次創新，都是 <em>未來的佈局</em>。」</div>
+    <div class="closing-author">KS010S 樂團隊 · 2026年4月月報</div>
+    <div class="closing-stats">
+      <div class="cs-item"><div class="cv">379</div><div class="cl">件服務</div></div>
+      <div class="cs-item"><div class="cv" style="color:#34D399">NT$291K</div><div class="cl">總服務價值</div></div>
+      <div class="cs-item"><div class="cv" style="color:#FCD34D">5人</div><div class="cl">滿載出動</div></div>
+      <div class="cs-item"><div class="cv" style="color:#C084FC">∞</div><div class="cl">AI 賦能潛力</div></div>
+    </div>
+    <div class="closing-footer">KS010S Department · Monthly Review · April 2026</div>
+    <div class="ai-powered-badge">✦ 本報告 &amp; 簡報全程 AI 一條龍完成 · Powered by Claude AI</div>
+  </div>
+  <div class="slide-num" style="color:rgba(255,255,255,.35)">12 / 12</div>
+</div>
+
+</div><!-- /deck -->
+
+<!-- Nav dots -->
+<div class="nav" id="navDots"></div>
+
+<script>
+const TOTAL = 12;
+let cur = 1;
+
+// Build dots
+const dotsEl = document.getElementById('navDots');
+for(let i=1;i<=TOTAL;i++){
+  const d=document.createElement('div');
+  d.className='nav-dot'+(i===1?' active':'');
+  d.onclick=()=>goTo(i);
+  dotsEl.appendChild(d);
+}
+
+function goTo(n){
+  document.getElementById('s'+cur).classList.remove('active');
+  dotsEl.children[cur-1].classList.remove('active');
+  cur=Math.max(1,Math.min(TOTAL,n));
+  document.getElementById('s'+cur).classList.add('active');
+  dotsEl.children[cur-1].classList.add('active');
+}
+function go(d){goTo(cur+d);}
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' ')go(1);
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp')go(-1);
+  if(e.key==='Home')goTo(1);
+  if(e.key==='End')goTo(TOTAL);
+});
+
+// Scale deck to window
+function scaleDeck(){
+  const deck=document.getElementById('deck');
+  const scaleX=window.innerWidth/1280;
+  const scaleY=window.innerHeight/720;
+  const scale=Math.min(scaleX,scaleY)*.96;
+  deck.style.transform=`translate(-50%,-50%) scale(${scale})`;
+}
+scaleDeck();
+window.addEventListener('resize',scaleDeck);
+</script>
+</body>
+</html>

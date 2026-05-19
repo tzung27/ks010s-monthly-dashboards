@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-ChildItem -Path \"D:\\\\excel_dashboard07 月報\" -Recurse -Force | Select-Object FullName, @{Name=\"Type\";Expression={if\\($_.PSIsContainer\\){\"[DIR]\"}else{[System.IO.Path]::GetExtension\\($_\\)}}}, @{Name=\"SizeMB\";Expression={if\\($_.PSIsContainer\\){\"-\"}else{[math]::Round\\($_.Length/1MB,2\\)}}} | Format-Table -AutoSize)",
+      "PowerShell(pip install pdfplumber -q)",
+      "Bash(python -c \"import pptx; print\\(pptx.__version__\\)\")",
+      "Bash(python -m pip install python-pptx -q)",
+      "Bash(python gen_pptx.py)",
+      "Bash(python gen_pptx_v2.py)",
+      "Bash(python -c ' *)",
+      "Bash(python gen_q1_data.py)",
+      "Bash(python update_jimmy_q1.py)",
+      "Bash(node --input-type=module)",
+      "Bash(python)",
+      "Bash(python update_nick.py)",
+      "Bash(backup)",
+      "Bash(bak\" -i)",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "Bash(python3 -c ' *)",
+      "Bash(node --check \"D:/excel_dashboard07 月報/check_script.js\")",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(python3 validate.py)",
+      "Bash(gh auth *)",
+      "Bash(git --version)",
+      "Bash(gh --version)",
+      "Bash(git init *)",
+      "Bash(git config *)",
+      "Bash(git add *)"
+    ]
+  }
+}
